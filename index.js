@@ -1,6 +1,14 @@
 
-const Test = () => {
-    return "Hello";
-}
+var Sdb = {
+    Init,
+    bash,
+    launch,
+    kill,
+    installByWgt,
+    installByTpk,
+    installByAppId,
+    getDebugPort,
+};
 
-default exports Test;
+
+module.exports = Sdb;
