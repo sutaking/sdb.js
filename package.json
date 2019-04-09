@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/sutaking/sdb.js/issues"
   },
-  "homepage": "https://github.com/sutaking/sdb.js#readme"
+  "homepage": "https://github.com/sutaking/sdb.js#readme",
+  "dependencies": {
+    "cross-spawn": "^6.0.5"
+  }
 }

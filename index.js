@@ -1,14 +1,19 @@
+const bash = require('./src/bash'); 
+
+
 
 var Sdb = {
-    Init,
     bash,
+    /*connect,
     launch,
     kill,
     installByWgt,
     installByTpk,
     installByAppId,
-    getDebugPort,
+    getDebugPort,*/
 };
 
 
 module.exports = Sdb;
+
+
