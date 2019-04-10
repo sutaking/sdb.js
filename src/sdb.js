@@ -1,6 +1,6 @@
 'use strict';
 const { execSync } = require('child_process');
-const {sdbPath} = require('./utils');
+const { sdbPath } = require('./utils');
 
 class Sdb {
     constructor(config) {
@@ -12,7 +12,7 @@ class Sdb {
     }
 
     _setDevMode() {
-        const {host} = this.config;
+        const { host } = this.config;
         const openMode = "vconftool set -t int db/sdk/develop/mode 1 -f";
         const setHost = `vconftool set -t string db/sdk/develop/ip ${host} -f`;
 
@@ -21,7 +21,7 @@ class Sdb {
     }
 
     bash(cmd) {
-        console.log(`[bash run]:${cmd}`);
+        console.log(`[Exec Shell]:${cmd}`);
         const { tv, user, pwd } = this.config;
 
         let execStr = `sshpass -p ${pwd} ssh ${user}@${tv} "${cmd}"`;
@@ -34,7 +34,7 @@ class Sdb {
         try {
             result = execSync(cmd);
             if (result.length > 0) {
-                
+
                 console.log(
                     `
 ******************* Log Info **********************
@@ -51,40 +51,47 @@ ${result.toString().trim()}
     }
 
     runCli(cmd) {
-        
+
 
         console.log(`runCli: [${sdbPath} ${cmd}]`);
 
         this._exec(`${sdbPath} ${cmd}`);
     }
 
-    connect() {
-        //this._setDevMode();
-        const {tv} = this.config;
-
+    _restartServer() {
         this.runCli('kill-server');
         this.runCli('start-server');
+    }
+
+    connect() {
+        //this._setDevMode();
+        this._restartServer();
+
+        const { tv } = this.config;
 
         this.runCli('disconnect');
         this.runCli(`connect ${tv}:26101`);
         this.runCli('devices');
 
         this.runCli(`-s ${tv} root on`);
-        //var SDB_COMMAND_ROOT = 'root on';
     }
 
 
     launch() {
-
+        const { tv } = this.config;
+        this.runCli(`-s ${tv} shell wascmd -r a`);
     }
     kill() {
 
     }
     installByWgt(wgtPath) {
-        const {tv} = this.config;
-        
-        //var pushCommand = SDB_PATH + SPACE + SDB_OPT_SERIAL + SPACE + SDB_COMMAND_PUSH + SPACE + localPath + SPACE + remotePath;
+        const { tv } = this.config;
+        const wgtName = '3201701011486_1.0.2.wgt';
+
         this.runCli(`-s ${tv} push ${wgtPath} ${this.remotePath}`);
+
+        const tvPath = `${this.remotePath}${wgtName}`;
+        this.runCli(`-s ${tv} shell wascmd -i a -p ${tvPath}`);
     }
     installByTpk() {
 
