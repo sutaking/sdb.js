@@ -1,23 +1,30 @@
-const bash = require('./src/bash'); 
-const connect = require('./src/connect');
+'use strict';
 
+const Sdb = require('./src/sdb');
+module.exports = Sdb;
 
-var Sdb = {
+/*var Sdb = {
     bash,
     connect,
-    /*launch,
+    launch,
     kill,
     installByWgt,
     installByTpk,
     installByAppId,
-    getDebugPort,*/
-};
+    getDebugPort,
+};*/
 
-Sdb.connect({
-    ip:"109.123.121.94",
+const cmd3 = "wascmd -l";
+
+let test = new Sdb({
+    tv:"109.123.121.94",
     user: "root",
-    pwd: "tizen"
-})
-module.exports = Sdb;
+    pwd: "tizen",
+    host: '109.123.121.146'
+});
+
+test.connect();
+
+
 
 
