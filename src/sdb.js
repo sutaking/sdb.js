@@ -5,7 +5,10 @@ const {sdbPath} = require('./utils');
 class Sdb {
     constructor(config) {
         this.config = config;
-        console.log(sdbPath);
+
+        // remote path for webapp install on Tv.
+        this.remotePath = '/opt/usr/home/';
+        //console.log(sdbPath);
     }
 
     _setDevMode() {
@@ -23,28 +26,51 @@ class Sdb {
 
         let execStr = `sshpass -p ${pwd} ssh ${user}@${tv} "${cmd}"`;
 
+        this._exec(execStr);
+    }
+
+    _exec(cmd) {
         let result;
         try {
-            result = execSync(execStr);
+            result = execSync(cmd);
             if (result.length > 0) {
+                
                 console.log(
-                    `*****************************************
+                    `
+******************* Log Info **********************
 ${result.toString().trim()}
-*****************************************`);
+********************** End ************************
+`);
+                return result.toString().trim();
             } else {
-                console.log(`[bash Excute Success] No Log Output ~~~~`)
+                console.log(`${Date()}[Excute Success]`)
             }
         } catch (error) {
             console.error(error.message);
         }
     }
 
-    _exec() {
+    runCli(cmd) {
+        
 
+        console.log(`runCli: [${sdbPath} ${cmd}]`);
+
+        this._exec(`${sdbPath} ${cmd}`);
     }
 
     connect() {
         //this._setDevMode();
+        const {tv} = this.config;
+
+        this.runCli('kill-server');
+        this.runCli('start-server');
+
+        this.runCli('disconnect');
+        this.runCli(`connect ${tv}:26101`);
+        this.runCli('devices');
+
+        this.runCli(`-s ${tv} root on`);
+        //var SDB_COMMAND_ROOT = 'root on';
     }
 
 
@@ -54,8 +80,11 @@ ${result.toString().trim()}
     kill() {
 
     }
-    installByWgt() {
-
+    installByWgt(wgtPath) {
+        const {tv} = this.config;
+        
+        //var pushCommand = SDB_PATH + SPACE + SDB_OPT_SERIAL + SPACE + SDB_COMMAND_PUSH + SPACE + localPath + SPACE + remotePath;
+        this.runCli(`-s ${tv} push ${wgtPath} ${this.remotePath}`);
     }
     installByTpk() {
 
