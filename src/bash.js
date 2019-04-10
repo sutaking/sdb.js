@@ -1,13 +1,26 @@
 const spawn = require('cross-spawn');
+const { execSync, exec } = require('child_process');
 
 const bash = (str, opt) => {
 
-    let result = spawn.sync(str,!opt ? []: [opt]).stdout.toString().trim();
+    console.log(`[bash run]:${str}`);
 
-    console.log(
-`*****************************************
-${result}
-*****************************************`);
-};
+    //let result = spawn.sync(str, !opt ? []: [opt]).stdout;
+    let result;
+    try {
+        result = execSync(str);
+        if (result.length > 0) {
+            console.log(
+                `*****************************************
+${result.toString().trim()}
+*****************************************`);                
+        } else {
+            console.log(`[] Excute Success! No log ouput~~~~`)
+        }
+    } catch (error) {
+        console.error(error.message);
+    }
+
+}; 
 
 module.exports = bash;
