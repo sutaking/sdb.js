@@ -12,7 +12,7 @@ module.exports = Sdb;
     installByTpk,
     installByAppId,
     getDebugPort,
-};*/
+};
 
 const cmd3 = "wascmd -l";
 
@@ -30,7 +30,7 @@ test.tvLog('CHROMIUM');
 
 test.installByFile('/home/zhaof/10.webDriver/3201701011486_1.0.2.wgt');
 test.launchDebug();
-
+*/
 
 
 

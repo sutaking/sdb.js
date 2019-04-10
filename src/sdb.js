@@ -1,7 +1,6 @@
 'use strict';
 const { execSync } = require('child_process');
 const crossSpawn = require('cross-spawn');
-const spawn = require('child_process').spawn
 const path = require('path');
 
 const { sdbPath } = require('./utils');
@@ -146,8 +145,8 @@ ${_log}
     }
     tvLog(key) {
         const { tv, user, pwd } = this.config;
-        let execStr = `sshpass -p ${pwd} ssh -o StrictHostKeyChecking=no ${user}@${tv} dlogutil ${key}`;
-        let log = crossSpawn('sshpass',['-p', pwd, 'ssh', '-o', 'StrictHostKeyChecking=no', `${user}@${tv}`, 'dlogutil', key]);
+
+        let log = crossSpawn('sshpass', ['-p', pwd, 'ssh', '-o', 'StrictHostKeyChecking=no', `${user}@${tv}`, 'dlogutil', key]);
 
         log.stdout.on('data', function (data) {
             console.log('stdout: ' + data.toString());

@@ -12,6 +12,4 @@ if (process.platform !== "win32") {
     execSync(`chmod +x ${sdbPath}`);
 }
 
-//console.log(`sdbPath ------> ${sdbPath}`);
-
 module.exports = { sdbPath };
