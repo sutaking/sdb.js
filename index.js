@@ -26,9 +26,11 @@ let test = new Sdb({
 });
 
 test.connect();
+test.tvLog('CHROMIUM');
 
-test.installByFile('/home/zhaof/10.webDriver/3201701011486_1.0.2.wgt', 'b');
-test.launch('b');
+test.installByFile('/home/zhaof/10.webDriver/3201701011486_1.0.2.wgt');
+test.launchDebug();
+
 
 
 
