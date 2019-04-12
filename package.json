@@ -1,6 +1,6 @@
 {
-  "name": "sdb",
-  "version": "0.0.1",
+  "name": "sdb.js",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,9 @@
     "url": "git+https://github.com/sutaking/sdb.js.git"
   },
   "keywords": [
-    "tizen"
+    "tizen",
+    "sdb",
+    "nodejs"
   ],
   "author": "zhaofeng.vip@gmail.com",
   "license": "MIT",
