@@ -1,7 +1,7 @@
 {
   "name": "sdb.js",
   "version": "0.1.0",
-  "description": "",
+  "description": "Based on Tizen WebApp SDB Command Line Devtools. You can use these npm package to install/uninstall your app by javascirpt.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
