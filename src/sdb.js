@@ -4,6 +4,7 @@ const crossSpawn = require('cross-spawn');
 const path = require('path');
 
 const { sdbPath } = require('./utils');
+const {keyMaps} = require('./keymaps');
 
 class Sdb {
     constructor(config) {
@@ -142,6 +143,11 @@ ${_log}
         }
         console.log(JSON.stringify(debugInfo));
         return debugInfo;
+    }
+    triggerRemoteController(key) {
+        if (key.length <= 0) return;
+
+        this.sdbShell(`vk_send ${keyMaps[key]}`);
     }
     tvLog(key) {
         const { tv, user, pwd } = this.config;
