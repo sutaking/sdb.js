@@ -60,7 +60,7 @@ tv.tvLog('ConsoleMessage');
 
 ````
 
-How to using webDriver to your app on Tizen TV
+How to using webDriver to build E2E TEST of your app on Tizen TV. [More see Example](https://github.com/sutaking/tizen-webapp-e2e-test)
 ````javascript
 // As Setp 3, If you want using webdriver to your app, you donot using launch().
 // You need instead of launchDebug()
